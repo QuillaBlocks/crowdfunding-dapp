@@ -1,0 +1,19 @@
+{
+  "name": "crowdfunding-dapp",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=frontend",
+    "build": "npm run build --workspace=frontend",
+    "start": "npm run start --workspace=frontend",
+    "lint": "npm run lint --workspace=frontend",
+    "contract:build": "stellar contract build --manifest-path contracts/crowdfunding/Cargo.toml",
+    "contract:test": "cargo test --manifest-path contracts/crowdfunding/Cargo.toml",
+    "deploy": "bash scripts/deploy.sh",
+    "init-crowdfunding": "bash scripts/init-crowdfunding.sh"
+  }
+}
