@@ -27,7 +27,7 @@ echo
 # 0. Verifica que la identity exista
 if ! stellar keys ls 2>/dev/null | grep -q "^${SOURCE}$"; then
   echo "✗ La identity '${SOURCE}' no existe."
-  echo "  Crea una con:  stellar keys generate --global ${SOURCE} --network ${NETWORK} --fund"
+  echo "  Crea una con:  stellar keys generate ${SOURCE} --network ${NETWORK} --fund"
   exit 1
 fi
 

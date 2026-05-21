@@ -65,7 +65,7 @@ npm install               # instala frontend + bindings package
 Crea (o asegura) una identity de Stellar en testnet, fondeada por Friendbot:
 
 ```bash
-stellar keys generate --global speaker --network testnet --fund
+stellar keys generate speaker --network testnet --fund
 stellar keys address speaker            # cópiala, será el admin
 ```
 
