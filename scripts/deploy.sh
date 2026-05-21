@@ -2,8 +2,12 @@
 # Build, upload y deploy del contrato a testnet. Regenera bindings TypeScript.
 #
 # Uso:
-#   scripts/deploy.sh                # despliega con identity por defecto
-#   scripts/deploy.sh alice          # despliega firmado por la identity "alice"
+#   scripts/deploy.sh SOURCE
+#   scripts/deploy.sh speaker        # despliega firmado por la identity "speaker"
+#
+# SOURCE es obligatorio: es la identity que firma deploy y upload. No es
+# necesariamente quien será el admin del crowdfunding (eso se decide al llamar
+# init-crowdfunding.sh), pero conviene usar la misma para que no te confundas.
 #
 # Requisitos:
 #   - stellar CLI 26+
@@ -13,11 +17,21 @@ set -euo pipefail
 
 cd "$(dirname "$0")/.."
 
-SOURCE="${1:-${STELLAR_ACCOUNT:-default}}"
+SOURCE="${1:-${STELLAR_ACCOUNT:-}}"
 NETWORK="${STELLAR_NETWORK:-testnet}"
 MANIFEST="contracts/crowdfunding/Cargo.toml"
 WASM="target/wasm32v1-none/release/crowdfunding.wasm"
 BINDINGS_DIR="packages/crowdfunding-client"
+
+if [[ -z "$SOURCE" ]]; then
+  echo "✗ Falta SOURCE (la identity que firma el deploy)." >&2
+  echo "  Uso: scripts/deploy.sh <identity>" >&2
+  echo "  o exporta STELLAR_ACCOUNT=<identity> antes de correr." >&2
+  echo >&2
+  echo "  Identities disponibles:" >&2
+  stellar keys ls 2>/dev/null | sed 's/^/    - /' >&2
+  exit 1
+fi
 
 echo "▶ stellar version: $(stellar --version | head -1)"
 echo "▶ source identity: $SOURCE"
@@ -75,9 +89,9 @@ cat <<EOF
 
    NEXT_PUBLIC_CONTRACT_ID=$CONTRACT_ID
 
-Y luego inicializa el crowdfunding con:
+Y luego inicializa el crowdfunding con (el último arg = identity que será admin):
 
-   scripts/init-crowdfunding.sh "Mi Vaca" 50 3600 $CONTRACT_ID
+   scripts/init-crowdfunding.sh "Mi Vaca" 50 3600 $CONTRACT_ID $SOURCE
 
 Sigue el README para más detalles.
 EOF
