@@ -16,6 +16,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# TypeScript build cache
+*.tsbuildinfo
+
 # Generated bindings (kept in repo, but artifacts are not)
 packages/crowdfunding-client/dist/
 
