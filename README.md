@@ -7,7 +7,8 @@ en tiempo real y, al alcanzarse la meta, el speaker demuestra el retiro
 restringido a admin. La instancia pre-expirada sirve para mostrar el flujo de
 refund sin tener que esperar al deadline.
 
-Especificación completa: [`CROWDFUNDING.md`](CROWDFUNDING.md).
+- Especificación completa: [`CROWDFUNDING.md`](CROWDFUNDING.md).
+- Playbook listo para una charla en vivo: [`DEMO.md`](DEMO.md).
 
 ---
 
