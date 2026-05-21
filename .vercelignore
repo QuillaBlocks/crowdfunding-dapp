@@ -1,0 +1,26 @@
+# Lo que NO sube a Vercel (acelera el build y achica el tarball)
+
+# Rust + contrato (no se compila en Vercel; el WASM se despliega aparte)
+target/
+contracts/
+Cargo.toml
+Cargo.lock
+
+# Snapshots de tests del contrato
+contracts/crowdfunding/test_snapshots/
+
+# Documentación y specs (no necesarios para el frontend)
+DEMO.md
+CROWDFUNDING.md
+README.md
+contracts/crowdfunding/README.md
+packages/crowdfunding-client/README.md
+
+# Scripts de despliegue del contrato (se corren localmente, no en CI)
+scripts/
+
+# Cache / locales
+.next/
+node_modules/
+*.tsbuildinfo
+.env.local

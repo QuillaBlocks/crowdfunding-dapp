@@ -160,6 +160,60 @@ Abre http://localhost:3000.
 
 ---
 
+## Desplegar a Vercel (auto-deploy en cada push a `main`)
+
+El repo ya trae `vercel.json` con la configuración de build para el monorepo.
+Lo único que tienes que hacer es importar el repo en Vercel una vez.
+
+### Primera vez (5 minutos)
+
+1. Entra a https://vercel.com/new y selecciona "Import Git Repository".
+2. Elige el repo (`QuillaBlocks/crowdfunding-dapp`).
+3. Vercel detecta automáticamente:
+   - Framework: **Next.js** (del `vercel.json`)
+   - Install Command: `npm install`
+   - Build Command: `npm run build --workspace=crowdfunding-client && npm run build --workspace=crowdfunding-frontend`
+   - Output Directory: `frontend/.next`
+
+   No cambies nada de esto.
+4. **Environment Variables** — agrega estas tres (todas con scope "Production" + "Preview" + "Development"):
+
+   | Key | Value |
+   |-----|-------|
+   | `NEXT_PUBLIC_CONTRACT_ID` | El contract ID activo (empieza con `C…`) |
+   | `NEXT_PUBLIC_CONTRACT_ID_EXPIRED` | (opcional) Contract ID de la vaca pre-expirada |
+   | `NEXT_PUBLIC_RPC_URL` | `https://soroban-testnet.stellar.org` |
+
+5. Click **Deploy**.
+
+Al terminar tienes una URL `https://crowdfunding-dapp-<hash>.vercel.app`. La promueves a un dominio custom desde el dashboard si quieres.
+
+### A partir de ahí (automático)
+
+- **Push a `main`** → deploy de producción (la URL principal).
+- **Push a cualquier otra rama / PR** → deploy de preview con su propia URL temporal (útil para probar cambios sin tocar la URL pública).
+- **Pull request comments**: Vercel deja un link al preview en cada PR.
+
+### Cuando despliegues un contrato nuevo
+
+Cada vez que corres `scripts/deploy.sh` localmente sale un `CONTRACT_ID` nuevo. Para que la app en Vercel apunte al contrato nuevo:
+
+1. Settings → Environment Variables → edita `NEXT_PUBLIC_CONTRACT_ID`.
+2. Re-despliega: Deployments → ⋯ → **Redeploy** (o haz un push vacío a `main`).
+
+Los bindings de TypeScript se commitean al repo cada vez que corres `deploy.sh`, así que el build de Vercel siempre usa los del último deploy.
+
+### Si el build falla en Vercel
+
+| Error | Causa | Fix |
+|-------|-------|-----|
+| `Cannot find module 'crowdfunding-client'` | Faltó el paso `tsc` de los bindings | Verifica que `npm run build --workspace=crowdfunding-client` esté en `vercel.json` |
+| `Module not found: ./dist/index.js` | El paquete de bindings no se compiló | Igual que arriba |
+| `Build exceeded maximum duration` | Stellar SDK + Next es pesado | Sube el plan o usa `output: 'standalone'` en `next.config.js` |
+| La página muestra "Falta configurar el contract ID" | `NEXT_PUBLIC_CONTRACT_ID` no está seteada en Vercel | Settings → Environment Variables |
+
+---
+
 ## Guion de la demo en vivo
 
 1. Abre la dApp con la vaca activa (proyector).

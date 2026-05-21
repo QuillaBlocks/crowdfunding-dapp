@@ -1,0 +1,12 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs",
+  "installCommand": "npm install",
+  "buildCommand": "npm run build --workspace=crowdfunding-client && npm run build --workspace=crowdfunding-frontend",
+  "outputDirectory": "frontend/.next",
+  "git": {
+    "deploymentEnabled": {
+      "main": true
+    }
+  }
+}
