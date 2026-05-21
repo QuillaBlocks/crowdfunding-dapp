@@ -24,8 +24,8 @@ const config: Config = {
       },
       fontSize: {
         // projector-friendly sizes
-        "hero": ["clamp(3rem, 9vw, 8rem)", { lineHeight: "0.92", letterSpacing: "-0.04em" }],
-        "amount": ["clamp(2.5rem, 7vw, 6.5rem)", { lineHeight: "1", letterSpacing: "-0.03em" }],
+        "hero": ["clamp(2.5rem, 6vw, 5.5rem)", { lineHeight: "0.95", letterSpacing: "-0.03em" }],
+        "amount": ["clamp(2rem, 5vw, 4.5rem)", { lineHeight: "1", letterSpacing: "-0.02em" }],
       },
       animation: {
         "marquee": "marquee 30s linear infinite",

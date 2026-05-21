@@ -69,7 +69,7 @@ export function RefundButton({ contractId, refreshKey, onSuccess }: Props) {
         <span className="text-xs uppercase tracking-[0.25em] text-white/55">
           Tu aporte recuperable
         </span>
-        <span className="text-amount text-xl font-bold text-amarillo">
+        <span className="font-mono text-xl font-bold tabular-nums text-amarillo">
           {formatXlm(contribution)} XLM
         </span>
       </div>

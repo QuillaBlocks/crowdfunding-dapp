@@ -131,12 +131,12 @@ function Admin() {
             <StatusBadge status={stat} />
           </div>
 
-          <div className="mt-6 grid gap-6 sm:grid-cols-[1.4fr_1fr] sm:items-end">
+          <div className="mt-6 grid gap-6 sm:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] sm:items-end">
             <div>
               <div className="text-[0.65rem] font-bold uppercase tracking-[0.3em] text-white/50">
                 Recaudado
               </div>
-              <div className="text-amount text-amount text-amarillo">
+              <div className="text-amount text-amarillo">
                 {formatXlm(BigInt(status!.total_raised.toString()))}
               </div>
               <div className="mt-1 font-mono text-xs text-white/45">

@@ -110,8 +110,8 @@ function Main() {
 
       {snapshot && (
         <>
-          <section className="relative grid gap-8 lg:grid-cols-[1.4fr_1fr]">
-            <div className="hard-card p-8 sm:p-12">
+          <section className="relative grid gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
+            <div className="hard-card min-w-0 p-8 sm:p-12">
               <div className="flex items-center justify-between gap-4">
                 <span className="tag-chip">
                   <span className="size-1.5 rounded-full bg-amarillo animate-pulse-strong" />
@@ -120,23 +120,23 @@ function Main() {
                 <StatusBadge status={stat} />
               </div>
 
-              <h1 className="mt-6 font-sans text-hero font-black uppercase text-balance leading-[0.92] text-white">
+              <h1 className="mt-6 break-words font-sans text-hero font-black uppercase leading-[0.92] text-white">
                 <span className="shine-text">{snapshot.name}</span>
               </h1>
 
-              <p className="mt-4 max-w-xl text-base sm:text-lg text-white/70 text-balance">
+              <p className="mt-4 max-w-xl text-base sm:text-lg text-white/70 text-pretty">
                 Una vaca comunitaria con las reglas grabadas en código. Conecta
                 Freighter, aporta lo que quieras, y mira en vivo cómo se llena
                 la meta on-chain.
               </p>
 
-              <div className="mt-10 grid gap-8 sm:grid-cols-[1.3fr_1fr] sm:items-end">
-                <div>
+              <div className="mt-10 grid gap-8 sm:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] sm:items-end">
+                <div className="min-w-0">
                   <div className="text-[0.7rem] font-bold uppercase tracking-[0.3em] text-white/55">
                     Recaudado
                   </div>
-                  <div className="mt-2 flex items-baseline gap-3">
-                    <span className="text-amount text-amount text-amarillo">
+                  <div className="mt-2 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                    <span className="text-amount text-amarillo">
                       {formatXlm(raisedStroops)}
                     </span>
                     <span className="text-xl font-bold uppercase tracking-[0.2em] text-white/55">
@@ -151,7 +151,7 @@ function Main() {
                   </div>
                 </div>
 
-                <div className="flex justify-start sm:justify-end">
+                <div className="flex min-w-0 justify-start sm:justify-end">
                   <Countdown deadline={deadline} />
                 </div>
               </div>
@@ -179,7 +179,7 @@ function Main() {
               </div>
             </div>
 
-            <aside className="flex flex-col gap-6">
+            <aside className="flex min-w-0 flex-col gap-6">
               <div className="hard-card p-6 sm:p-8">
                 <h3 className="text-xs font-bold uppercase tracking-[0.3em] text-white/60">
                   {isCompleted
@@ -234,7 +234,7 @@ function Main() {
             </aside>
           </section>
 
-          <section className="grid gap-6 lg:grid-cols-[1fr_1.2fr]">
+          <section className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
             <ContributorsList
               contractId={instance.contractId}
               refreshKey={refreshCount}
@@ -283,7 +283,7 @@ function Stat({
         {label}
       </div>
       <div className="mt-1 flex items-baseline gap-1.5">
-        <span className="text-amount text-2xl font-bold text-white">{value}</span>
+        <span className="font-mono text-2xl font-bold tabular-nums text-white">{value}</span>
         {unit && (
           <span className="text-[0.7rem] font-bold uppercase tracking-[0.2em] text-white/40">
             {unit}
@@ -320,7 +320,7 @@ function HowItWorks() {
       <ol className="mt-5 space-y-5">
         {steps.map((s) => (
           <li key={s.n} className="flex gap-4">
-            <span className="text-amount text-3xl font-black text-amarillo">{s.n}</span>
+            <span className="font-mono text-3xl font-black tabular-nums text-amarillo">{s.n}</span>
             <div>
               <div className="text-base font-bold text-white">{s.title}</div>
               <div className="text-sm text-white/60">{s.body}</div>

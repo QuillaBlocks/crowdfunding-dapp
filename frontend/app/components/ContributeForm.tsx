@@ -74,23 +74,24 @@ export function ContributeForm({
         ))}
       </div>
 
-      <div className="flex items-stretch gap-3 rounded-2xl border border-white/10 bg-navy-700/60 p-2 backdrop-blur focus-within:border-amarillo">
-        <div className="flex items-center pl-3 text-white/40">
+      <div className="flex w-full min-w-0 items-stretch gap-3 rounded-2xl border border-white/10 bg-navy-700/60 p-2 backdrop-blur focus-within:border-amarillo">
+        <div className="flex shrink-0 items-center pl-3 text-white/40">
           <span className="font-mono text-sm uppercase tracking-widest">XLM</span>
         </div>
         <input
           type="text"
           inputMode="decimal"
+          size={1}
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
           placeholder="Monto"
-          className="text-amount flex-1 bg-transparent px-1 py-2 text-2xl font-bold tabular-nums text-white outline-none placeholder:text-white/30"
+          className="font-mono w-0 min-w-0 flex-1 bg-transparent px-1 py-2 text-2xl font-bold tabular-nums text-white outline-none placeholder:text-white/30 sm:text-3xl"
           aria-label="Monto a contribuir"
         />
         <button
           type="submit"
           disabled={isDisabled}
-          className="group relative inline-flex shrink-0 items-center gap-2 overflow-hidden rounded-xl bg-rojo px-6 py-3 text-sm font-bold uppercase tracking-[0.2em] text-white transition hover:bg-naranja disabled:cursor-not-allowed disabled:opacity-50"
+          className="group relative inline-flex shrink-0 items-center gap-2 overflow-hidden rounded-xl bg-rojo px-5 py-3 text-xs font-bold uppercase tracking-[0.2em] text-white transition hover:bg-naranja disabled:cursor-not-allowed disabled:opacity-50 sm:px-6 sm:text-sm"
         >
           <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent transition group-hover:translate-x-full duration-700" />
           <span className="relative z-10">
