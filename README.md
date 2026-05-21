@@ -1,10 +1,11 @@
 # Vaca · Crowdfunding dApp sobre Stellar
 
-Demo dApp para **Stellar Campus · Universidad del Norte (21 de mayo de 2026)**. Implementa
-una "vaca" (caja comunitaria LATAM) como contrato Soroban + frontend Next.js. Los
-asistentes conectan Freighter y aportan XLM en vivo; la barra de progreso sube en
-tiempo real y, al alcanzarse la meta, el speaker demuestra el retiro restringido a
-admin. La instancia pre-expirada sirve para mostrar el flujo de refund.
+Demo dApp diseñada para charlas y talleres de Stellar/Soroban. Implementa una
+"vaca" (caja comunitaria LATAM) como contrato Soroban + frontend Next.js. Los
+asistentes conectan Freighter y aportan XLM en vivo; la barra de progreso sube
+en tiempo real y, al alcanzarse la meta, el speaker demuestra el retiro
+restringido a admin. La instancia pre-expirada sirve para mostrar el flujo de
+refund sin tener que esperar al deadline.
 
 Especificación completa: [`CROWDFUNDING.md`](CROWDFUNDING.md).
 
@@ -116,7 +117,7 @@ Una vez desplegado, llama `initialize` con los parámetros que quieras:
 
 ```bash
 # Vaca activa: meta 50 XLM, deadline en 60 minutos
-scripts/init-crowdfunding.sh "Stellar Campus Vaca" 50 3600 \
+scripts/init-crowdfunding.sh "Vaca de la charla" 50 3600 \
   C…CONTRACT_ID…  speaker
 ```
 

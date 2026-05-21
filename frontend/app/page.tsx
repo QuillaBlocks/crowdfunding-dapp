@@ -245,7 +245,7 @@ function Main() {
       )}
 
       <footer className="mt-auto flex flex-wrap items-center justify-between gap-2 border-t border-white/5 pt-6 text-xs text-white/40">
-        <span className="font-mono">QuillaBlocks · Stellar Campus · Uninorte</span>
+        <span className="font-mono">QuillaBlocks · Demo Soroban</span>
         <span className="font-mono">soroban-sdk 26 · stellar-cli 26</span>
       </footer>
     </main>

@@ -5,7 +5,7 @@
 #   scripts/init-crowdfunding.sh "Nombre" GOAL_XLM DEADLINE_SECONDS CONTRACT_ID [SOURCE]
 #
 # Ejemplos:
-#   scripts/init-crowdfunding.sh "Stellar Campus" 50 3600 CDLZFC… alice
+#   scripts/init-crowdfunding.sh "Vaca de la charla" 50 3600 CDLZFC… alice
 #   scripts/init-crowdfunding.sh "Vaca expirada" 50 1 CDLZ…
 #       (deadline=1s → expira casi inmediatamente, sirve para demo de refund)
 set -euo pipefail

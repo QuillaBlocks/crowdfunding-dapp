@@ -39,7 +39,7 @@
                   "address": "CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD2KM"
                 },
                 {
-                  "string": "Stellar Campus Vaca"
+                  "string": "Vaca de prueba"
                 },
                 {
                   "i128": "500000000"
@@ -202,7 +202,7 @@
                         ]
                       },
                       "val": {
-                        "string": "Stellar Campus Vaca"
+                        "string": "Vaca de prueba"
                       }
                     },
                     {

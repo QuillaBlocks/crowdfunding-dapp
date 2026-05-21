@@ -1,6 +1,6 @@
 # Crowdfunding — Soroban dApp
 
-Demo dApp para Stellar Campus Sesión 2 (Universidad del Norte · 21 de mayo de 2026). Implementa el concepto de una "vaca" (caja de ahorro comunitaria) como smart contract en Soroban, con frontend para que los asistentes contribuyan en vivo desde su wallet.
+Demo dApp pensada para charlas y talleres sobre Stellar/Soroban. Implementa el concepto de una "vaca" (caja de ahorro comunitaria) como smart contract en Soroban, con frontend para que los asistentes contribuyan en vivo desde su wallet.
 
 ## Concepto
 
@@ -27,7 +27,7 @@ El contrato resuelve esto poniendo las reglas en código:
 ### Estado del crowdfunding
 
 - `admin`: la dirección que organiza el crowdfunding y puede retirar al cumplirse la meta.
-- `name`: nombre legible (por ejemplo, "Crowdfunding Stellar Campus").
+- `name`: nombre legible (por ejemplo, "Vaca de la charla").
 - `goal`: monto objetivo en stroops (1 XLM = 10⁷ stroops).
 - `deadline`: timestamp Unix hasta el cual se aceptan contribuciones.
 - `total_raised`: monto acumulado actual.

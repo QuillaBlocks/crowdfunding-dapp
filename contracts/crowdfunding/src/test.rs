@@ -48,7 +48,7 @@ fn setup_with_goal_and_deadline(goal_xlm: i128, deadline_offset: u64) -> Setup<'
     let goal = goal_xlm * STROOPS_PER_XLM;
     let deadline = env.ledger().timestamp() + deadline_offset;
 
-    let name = String::from_str(&env, "Stellar Campus Vaca");
+    let name = String::from_str(&env, "Vaca de prueba");
     client.initialize(&admin, &name, &goal, &deadline, &token);
 
     Setup {
