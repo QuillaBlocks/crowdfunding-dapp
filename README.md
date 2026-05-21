@@ -169,8 +169,9 @@ Lo único que tienes que hacer es importar el repo en Vercel una vez.
 
 1. Entra a https://vercel.com/new y selecciona "Import Git Repository".
 2. Elige el repo (`QuillaBlocks/crowdfunding-dapp`).
-3. Vercel detecta automáticamente:
-   - Framework: **Next.js** (del `vercel.json`)
+3. **Importante — Root Directory**: Vercel va a sugerirte `frontend` automáticamente porque ahí detecta Next.js. **No lo aceptes**. Click "Edit" al lado de Root Directory y déjalo en `./` (la raíz del repo). Si no lo haces, npm workspaces no resuelve `crowdfunding-client` y el build falla con `Cannot find module 'crowdfunding-client'` o con la ruta duplicada `frontend/frontend/.next not found`.
+4. Vercel lee `vercel.json` y autoconfigura:
+   - Framework: **Next.js**
    - Install Command: `npm install`
    - Build Command: `npm run build --workspace=crowdfunding-client && npm run build --workspace=crowdfunding-frontend`
    - Output Directory: `frontend/.next`
@@ -207,8 +208,9 @@ Los bindings de TypeScript se commitean al repo cada vez que corres `deploy.sh`,
 
 | Error | Causa | Fix |
 |-------|-------|-----|
-| `Cannot find module 'crowdfunding-client'` | Faltó el paso `tsc` de los bindings | Verifica que `npm run build --workspace=crowdfunding-client` esté en `vercel.json` |
-| `Module not found: ./dist/index.js` | El paquete de bindings no se compiló | Igual que arriba |
+| `Cannot find module 'crowdfunding-client'` | Faltó el paso `tsc` de los bindings, o Root Directory = `frontend` (workspaces no resuelven) | Settings → Root Directory = `./` |
+| `frontend/frontend/.next not found` | Root Directory = `frontend` y `vercel.json` duplica la ruta | Settings → Root Directory = `./` y Redeploy |
+| `Module not found: ./dist/index.js` | El paquete de bindings no se compiló | Verifica que `npm run build --workspace=crowdfunding-client` corra primero |
 | `Build exceeded maximum duration` | Stellar SDK + Next es pesado | Sube el plan o usa `output: 'standalone'` en `next.config.js` |
 | La página muestra "Falta configurar el contract ID" | `NEXT_PUBLIC_CONTRACT_ID` no está seteada en Vercel | Settings → Environment Variables |
 
