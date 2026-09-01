@@ -120,7 +120,7 @@ function Main() {
                 <StatusBadge status={stat} />
               </div>
 
-              <h1 className="mt-6 break-words font-sans text-hero font-black uppercase leading-[0.92] text-white">
+              <h1 className="mt-6 font-sans text-hero font-black uppercase leading-[0.92] text-white [hyphens:none] [overflow-wrap:normal] text-balance">
                 <span className="shine-text">{snapshot.name}</span>
               </h1>
 
