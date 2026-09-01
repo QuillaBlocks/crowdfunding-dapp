@@ -15,14 +15,14 @@ const EXPIRED = (process.env.NEXT_PUBLIC_CONTRACT_ID_EXPIRED || "").trim();
 export const INSTANCES: CrowdfundingInstance[] = [
   {
     id: "active",
-    label: "Vaca en vivo",
-    description: "Instancia activa de la charla",
+    label: "Pool Comunitario",
+    description: "La vaca de la sesión — contribuye aquí",
     contractId: ACTIVE,
   },
   {
     id: "expired",
-    label: "Vaca expirada",
-    description: "Demo de refund (deadline ya pasó)",
+    label: "Demo del speaker",
+    description: "Meta baja, para demostrar withdraw en vivo",
     contractId: EXPIRED,
   },
 ].filter((i) => i.contractId.length > 0) as CrowdfundingInstance[];

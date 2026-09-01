@@ -26,7 +26,12 @@ export async function fetchRecentContributions(
 ): Promise<ContributorEntry[]> {
   const s = server();
   const latest = await s.getLatestLedger();
-  const lookback = 17_000; // ~24h at 5s ledgers — covers the demo window
+  // El RPC público de testnet sólo retiene eventos de una ventana reciente.
+  // Si pides un startLedger fuera de esa ventana, la respuesta vuelve VACÍA
+  // en silencio — sin error — y el feed parece roto aunque haya aportes.
+  // 4.000 ledgers ≈ 5,5 h a 5 s por ledger: cubre una sesión completa con
+  // margen y queda cómodamente dentro de la retención.
+  const lookback = 4_000;
   const startLedger = Math.max(latest.sequence - lookback, 1);
 
   const filters = [
