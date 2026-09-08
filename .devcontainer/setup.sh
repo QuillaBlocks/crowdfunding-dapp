@@ -5,7 +5,11 @@
 # primer `stellar contract build` del asistente compila soroban-sdk desde cero:
 # en una máquina de 2 núcleos son 5–10 minutos, por persona, en el medio del
 # taller. Compilándolo aquí, su primera edición es incremental (~20 s).
-set -euo pipefail
+# Sin `set -e`: si algo aquí falla, el contenedor debe crearse IGUAL. Un
+# onCreateCommand que devuelve error hace que Codespaces caiga a un contenedor
+# de recuperación SIN Rust — y el asistente se queda sin entorno, que es mucho
+# peor que quedarse sin la pre-compilación.
+set -uo pipefail
 
 echo "▶ Dependencias del sistema…"
 # El binario del Stellar CLI enlaza contra libdbus (keyring). Sin ella aborta con
@@ -19,8 +23,21 @@ sudo apt-get install -y -qq --only-upgrade ca-certificates >/dev/null 2>&1 || tr
 sudo update-ca-certificates >/dev/null 2>&1 || true
 sudo apt-get install -y -qq libdbus-1-3 >/dev/null 2>&1 || true
 
+echo "▶ Rust al día…"
+# El Stellar CLI 28 compila contra wasm32v1-none, un target que sólo existe
+# desde Rust 1.85. La imagen base trae uno anterior, así que sin actualizar
+# primero el `target add` falla y el build muere con exit 101.
+rustup update stable
+rustup default stable
+rustc --version | sed 's/^/  /'
+
 echo "▶ Target WebAssembly…"
-rustup target add wasm32v1-none 2>/dev/null || rustup target add wasm32-unknown-unknown
+if rustup target add wasm32v1-none; then
+  echo "  wasm32v1-none listo"
+else
+  echo "  ⚠ wasm32v1-none no disponible — intento wasm32-unknown-unknown"
+  rustup target add wasm32-unknown-unknown || true
+fi
 
 echo "▶ Stellar CLI…"
 STELLAR_VERSION="28.0.0"
@@ -44,7 +61,12 @@ stellar network add testnet \
   --network-passphrase "Test SDF Network ; September 2015" 2>/dev/null || true
 
 echo "▶ Pre-compilando el contrato (esto es lo que te ahorra la espera)…"
-stellar contract build --manifest-path contracts/crowdfunding/Cargo.toml 2>&1 | tail -2 | sed 's/^/  /'
+if stellar contract build --manifest-path contracts/crowdfunding/Cargo.toml 2>&1 | tail -3 | sed 's/^/  /'; then
+  echo "  ✔ contrato pre-compilado"
+else
+  echo "  ⚠ la pre-compilación falló; el entorno sirve igual, pero tu primer"
+  echo "    build va a tardar unos minutos en vez de segundos."
+fi
 
 echo "▶ Dependencias del frontend…"
 npm install --no-audit --no-fund >/dev/null 2>&1 || true
@@ -69,3 +91,6 @@ cat <<'BANNER'
   El paso a paso completo está en:  retos/sesion-3/
 
 BANNER
+
+# El contenedor se crea sí o sí.
+exit 0
