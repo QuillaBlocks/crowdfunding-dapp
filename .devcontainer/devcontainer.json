@@ -1,0 +1,25 @@
+{
+  "name": "Stellar Campus · Sesión 3",
+  "image": "mcr.microsoft.com/devcontainers/rust:1-1-bookworm",
+
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": { "version": "22" },
+    "ghcr.io/devcontainers/features/sshd:1": { "version": "latest" }
+  },
+
+  "onCreateCommand": "bash .devcontainer/setup.sh",
+
+  "customizations": {
+    "vscode": {
+      "extensions": ["rust-lang.rust-analyzer"],
+      "settings": {
+        "editor.fontSize": 15,
+        "terminal.integrated.fontSize": 14,
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  },
+
+  "hostRequirements": { "cpus": 2, "memory": "8gb" },
+  "remoteUser": "vscode"
+}
