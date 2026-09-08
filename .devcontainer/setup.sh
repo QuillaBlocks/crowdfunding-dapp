@@ -61,7 +61,7 @@ stellar network add testnet \
   --network-passphrase "Test SDF Network ; September 2015" 2>/dev/null || true
 
 echo "▶ Pre-compilando el contrato (esto es lo que te ahorra la espera)…"
-if stellar contract build --manifest-path contracts/crowdfunding/Cargo.toml 2>&1 | tail -3 | sed 's/^/  /'; then
+if stellar contract build 2>&1 | tail -3 | sed 's/^/  /'; then
   echo "  ✔ contrato pre-compilado"
 else
   echo "  ⚠ la pre-compilación falló; el entorno sirve igual, pero tu primer"
@@ -86,7 +86,7 @@ cat <<'BANNER'
   2. Edita  contracts/crowdfunding/src/contract.rs
 
   3. Compila:
-       stellar contract build --manifest-path contracts/crowdfunding/Cargo.toml
+       stellar contract build
 
   El paso a paso completo está en:  retos/sesion-3/
 
